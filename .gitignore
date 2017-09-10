@@ -1,0 +1,7 @@
+node_modules/
+build/
+dist/
+
+.idea/campaignAdyouLike.iml
+.idea/modules.xml
+.idea/workspace.xml
