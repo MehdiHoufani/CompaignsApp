@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { itemsFetchData } from "./actorAct";
+import { addCampaign } from "./compaignsAct";
 
 
 export const mapStateToProps = (state) => {
@@ -13,7 +14,8 @@ export const mapStateToProps = (state) => {
 
 export const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: (url) => dispatch(itemsFetchData(url))
+        fetchData: (url) => dispatch(itemsFetchData(url)),
+        addCampaign: (campaign) => dispatch(addCampaign(campaign))
     };
 };
 

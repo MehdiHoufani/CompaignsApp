@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
 import * as _ from 'lodash';
+import injectAct from '../../../actions/index'
 import { Panel, Table , Badge} from 'react-bootstrap';
 
 import Campaign from './campaign';
+import CampaignInput from './CampaignInput';
 
 class Brand extends Component{
     render(){
         const brandName = _.get(this.props.brand, 'name');
         const campaigns = _.get(this.props.brand, 'campaigns');
+        const addCampaign = true;
         const badgeInstance = (
             <div className="container">
                 <div className="row">
@@ -22,7 +25,6 @@ class Brand extends Component{
         );
 
         return (
-            <div className="z-depth-5">
             <Panel header={badgeInstance}>
                 <Table hover>
                     <thead>
@@ -47,8 +49,11 @@ class Brand extends Component{
                         }
                     </tbody>
                 </Table>
+                {
+                    addCampaign &&
+                    <CampaignInput/>
+                }
             </Panel>
-            </div>
         );
     }
 
@@ -56,4 +61,4 @@ class Brand extends Component{
 
 }
 
-export default Brand;
+export default injectAct(Brand);

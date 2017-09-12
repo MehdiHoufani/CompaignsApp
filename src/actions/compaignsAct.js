@@ -21,3 +21,10 @@ export function itemsFetchDataSucess(items){
         brands : items,
     };
 }
+
+export function addCampaign(campaign){
+    return{
+        type : ACTION_TYPE.ADD_CAMPAIGN,
+        campaign
+    }
+}

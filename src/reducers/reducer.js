@@ -1,6 +1,6 @@
 import { ACTION_TYPE} from "../common/constantes/const_act";
 import { _ } from 'lodash';
-import {getCampaignsBrands} from "../common/utils";
+import { getCampaignsBrands } from "../common/utils";
 
 export function itemsHasErrored(state = false, action) {
     switch (action.type){
@@ -29,6 +29,17 @@ export function items(state = [], action ){
                 brands : getCampaignsBrands(action.brands)
             });
 
+        default:
+            return state;
+    }
+}
+
+export function addCampaign(state = [], action ){
+    switch (action.type){
+        case ACTION_TYPE.ADD_CAMPAIGN:
+            return Object.assign({}, state, {
+                brands : addCampaign(state, action.campaign)
+            });
         default:
             return state;
     }

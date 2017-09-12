@@ -26,3 +26,13 @@ export function getCampaignsBrands(items) {
 
     return campaignsByBrands;
 }
+
+export function addCompaign(brands, campaign){
+
+ _.forEach(brands, brand => {
+     if(brand.id === campaign.brandId){
+         brand.campaigns.push(campaign)
+     }
+ })
+return brands;
+}
