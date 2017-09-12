@@ -10,7 +10,6 @@ class Brand extends Component{
     render(){
         const brandName = _.get(this.props.brand, 'name');
         const campaigns = _.get(this.props.brand, 'campaigns');
-        const addCampaign = true;
         const badgeInstance = (
             <div className="container">
                 <div className="row">
@@ -49,10 +48,6 @@ class Brand extends Component{
                         }
                     </tbody>
                 </Table>
-                {
-                    addCampaign &&
-                    <CampaignInput/>
-                }
             </Panel>
         );
     }

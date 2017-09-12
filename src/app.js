@@ -3,10 +3,10 @@ import injectAct from './actions/index';
 import { Grid, Row, Col, Navbar, Nav, NavItem} from 'react-bootstrap'
 import { API_ADYOULIKE } from "./common/constantes/const_app_config";
 import Campaigns from './pages/Campaigns/index';
+import CampaignInput from './pages/Campaigns/components/CampaignInput';
 
 require( './assets/bootstrap/css/bootstrap.css');
-
-
+require('./assets/app.css')
 
 class App extends Component{
     constructor(props){
@@ -49,9 +49,12 @@ class App extends Component{
                             </Navbar>
                         </Row>
                         <Row className="showgrid">
-                            <section className="col-md-8 col-md-offset-2">
-                                <Campaigns/>
-                            </section>
+                          <section className="col-md-4">
+                            <CampaignInput/>
+                          </section>
+                          <section className="col-md-8">
+                            <Campaigns/>
+                          </section>
                         </Row>
                     </Grid>
                 </div>

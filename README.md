@@ -1,4 +1,4 @@
-# CampaignApp - by Mehdi Houfani
+# CampaignApp
 
 
 # install : Allow-Control-Allow-Origin plugin for chrome
