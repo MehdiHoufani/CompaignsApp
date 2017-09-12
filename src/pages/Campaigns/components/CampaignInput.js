@@ -20,6 +20,7 @@ class CampaignInput extends Component{
         this.handleChangeEnd = this.handleChangeEnd.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.addCampaign = this.addCampaign.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     componentWillReceiveProps(nextProps){
           this.getKeywords(nextProps.brands)
@@ -33,7 +34,6 @@ class CampaignInput extends Component{
     }
 
     handleChangeStart(event) {
-        console.log(event.target.value);
         this.setState({
             startDate: event.target.value
         });
@@ -46,7 +46,7 @@ class CampaignInput extends Component{
     }
 
     getKeywords(brands){
-      let suggestions = []
+      let suggestions = [];
        _.get(brands, 'brands', []).map( brand => {
         suggestions.push(brand.name)
       });
@@ -57,17 +57,16 @@ class CampaignInput extends Component{
 
     getSuggest(){
       const value = _.trim(this.state.brandValue);
-      if(value.length < 1){
-        return undefined
+      if(value.length <= 1){
+        return ""
       }else {
         const words = this.state.keywords;
-        let keyMatch = "";
         const find = words.map(word => {
           if (word.substring(0, value.length) === value) {
-            return keyMatch.concat(word, " ")
+            return word
           }
-        })
-        return find[0];
+        });
+        return find.join("");
       }
     }
 
@@ -78,38 +77,38 @@ class CampaignInput extends Component{
     }
 
     getValidationState(){
-        const length = this.state.brandValue;
-        const startDate = this.state.startDate;
-        const endDate = this.state.endDate;
-        if(length > 10) return 'success';
-        else if(length>5) return 'warning';
-        else if(length === 0) return 'error';
+        // for the future
     }
 
     handleSubmit(){
         const newCampaign = {
-            id: this.createUniqueId(),
-            startDate: this.state.startDate,
-            endDate: this.state.endDate || null,
-            brandId: this.getIdBrandSelected()
-        }
-        this.props.addCampaign(newCampaign);
+            id: this.generateId(),
+            startDate: moment(this.state.startDate,"YYYY-MM-DD").format('X'),
+            endDate: this.state.endDate? moment(this.state.endDate,"YYYY-MM-DD").format('X') : null,
+            brandId: this.getIdBrandSelected(this.state.brandValue)
+        };
+        const brands = _.get(this.props.brands,'brands');
+        this.props.addCampaign(brands, newCampaign);
     }
 
     getIdBrandSelected(brandValue){
-      const brands = _.get(this.props.brands,'brands')
-      const idBrand = brands.map( brand => {
-          if(brand.name = brandValue){
-            return brand.id
-          }
-      })
-      return idBrand;
+        return _.find(_.get(this.props.brands,'brands'),
+                    brand => {
+                        return brand.name === brandValue
+                }).id;
+
     }
 
-    createUniqueId(){
-      const brands = _.get(this.props.brands,'brands')
-      console.log(brands);
-      return 40
+    generateId(){
+      const brands =_.get(this.props.brands,'brands');
+      const keys = [];
+      brands.map( brand => {
+         _.forEach(brand.campaigns, campaign => {
+            keys.push(campaign.id);
+         })
+      });
+
+      return _.max(keys)+1
     }
 
     render(){

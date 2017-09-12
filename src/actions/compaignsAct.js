@@ -1,5 +1,4 @@
 import { ACTION_TYPE } from "../common/constantes/const_act";
-import { getCampaignsBrands} from "../common/utils";
 
 export function itemsHasErrors(bool){
     return {
@@ -22,9 +21,10 @@ export function itemsFetchDataSucess(items){
     };
 }
 
-export function addCampaign(campaign){
+export function addCampaign(brands, campaign){
     return{
         type : ACTION_TYPE.ADD_CAMPAIGN,
+        brands,
         campaign
     }
 }

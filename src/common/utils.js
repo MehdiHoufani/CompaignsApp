@@ -5,15 +5,15 @@ import Campaign from './entity/Campaign';
 
 export function getCampaignsBrands(items) {
 
-    var brands = _.get(items, 'brands', []);
-    var campaigns = _.get(items, 'campaigns', []);
-    var campaignsByBrands = [];
+    const brands = _.get(items, 'brands', []);
+    const campaigns = _.get(items, 'campaigns', []);
+    const campaignsByBrands = [];
 
     _.forEach(brands, item => {
-        var brand = new Brand(item.id, item.name, []);
+        const brand = new Brand(item.id, item.name, []);
         _.forEach(campaigns, itemCampaign => {
             if(brand.getId() === itemCampaign.brand_id){
-                var campaign = new Campaign(itemCampaign.id,
+                const campaign = new Campaign(itemCampaign.id,
                                             itemCampaign.start_date,
                                             itemCampaign.end_date,
                                             itemCampaign.brand_id);
@@ -27,12 +27,11 @@ export function getCampaignsBrands(items) {
     return campaignsByBrands;
 }
 
-export function addCompaign(brands, campaign){
-
- _.forEach(brands, brand => {
-     if(brand.id === campaign.brandId){
-         brand.campaigns.push(campaign)
-     }
- })
-return brands;
+export function addCompaign(brands, campaign) {
+    _.forEach(brands, brand => {
+        if (brand.id === campaign.brandId) {
+            brand.campaigns.push(campaign)
+        }
+    });
+    return brands;
 }

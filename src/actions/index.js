@@ -15,7 +15,7 @@ export const mapStateToProps = (state) => {
 export const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: (url) => dispatch(itemsFetchData(url)),
-        addCampaign: (campaign) => dispatch(addCampaign(campaign))
+        addCampaign: (brands, campaign) => dispatch(addCampaign(brands, campaign))
     };
 };
 
